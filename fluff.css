@@ -20,9 +20,14 @@ button {
     display: block;
     padding-left: 140px;
     padding-right: 140px;
+    text-align: center;
+    flex-wrap: wrap;
 }
 
-/* added styling to class start button */
-.startbutton {
-    margin-left: 400px;
+.title {
+    font-size: 200%;
+}
+
+.intro {
+    font-size: 130% ;
 }
