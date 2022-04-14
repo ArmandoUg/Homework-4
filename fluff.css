@@ -1,0 +1,12 @@
+/* body {
+    display: flex;
+} */
+
+header {
+    display: inline-flex;
+    top: -1;
+    justify-content: space-between;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    width: 90%
+}
