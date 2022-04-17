@@ -10,18 +10,27 @@ header {
 
 /* added universal button color and radius */
 button {
+    display: inline-flex;
     background-color: blueviolet;
     border-radius: 20%;
-
+   text-align: center;
+   flex-direction: column;
+   justify-content: center;
+   margin: auto;
+   width: 10%;
+   text-align: center;
+   padding:.3% ;
 }
 
 /* added styling to starting quizcard class  */
 .quizcard {
-    display: block;
+    display: flex;
     padding-left: 140px;
     padding-right: 140px;
     text-align: center;
     flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .title {
@@ -29,5 +38,9 @@ button {
 }
 
 .intro {
-    font-size: 130% ;
+    font-size: 130%;
+}
+.startbutton {
+    display: inline-flex;
+    text-align: center;
 }

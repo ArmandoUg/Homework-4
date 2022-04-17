@@ -48,6 +48,7 @@ var quizquestions = [
     },
 ];
 // created a function for count
+// created a timer
 function count() {
     var timer = setInterval(function() {
     timeleft--;
@@ -57,8 +58,6 @@ function count() {
     }
 }, 1000);
 }
-// created a timer
-// var timer = setInterval(count, 1000);
 // added a function to show current question
 function displayquestion() {
     quizcardel.innerHTML = "";
@@ -67,10 +66,8 @@ function displayquestion() {
     qTitleEl.textContent = q.question;
     quizcardel.append(qTitleEl);
     
-    function startquiz() {
-    };
-    var answers = quizquestions.answers;
-    for (var i = 0; i < length; i++) {
+    var answers = q.answers;
+    for (var i = 0; i < answers.length; i++) {
         var answer = answers[i];
         var button = document.createElement("button");
         // var response = document.querySelector(".quizcard)");
@@ -93,4 +90,4 @@ function displayquestion() {
 starti.addEventListener("click", function() { 
     count()
     displayquestion()
-    }); 
+}); 
