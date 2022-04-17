@@ -18,8 +18,8 @@ button {
    justify-content: center;
    margin: auto;
    width: 10%;
-   text-align: center;
-   padding:.3% ;
+   text-align:justify;
+   padding:.4% ;
 }
 
 /* added styling to starting quizcard class  */
@@ -42,5 +42,5 @@ button {
 }
 .startbutton {
     display: inline-flex;
-    text-align: center;
+    text-align: right;
 }

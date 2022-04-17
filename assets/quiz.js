@@ -18,6 +18,8 @@ var quizquestions = [
             "White",
         ],
         correct: "Red",
+        incorrect: ["Green",
+            "White"],
     },
     {
         question: "How many centimeters does the Eiffel Tower shrink during the summer?",
@@ -27,6 +29,10 @@ var quizquestions = [
             "12 centimeters",
         ],
         correct: "15 Centimeters",
+        incorrect: [
+            "None, it doesn't shrink",
+            "12 centimeters",
+        ]
     },
     {
         question: "How many pleats are on a chef hat?",
@@ -36,6 +42,10 @@ var quizquestions = [
             "120",
         ],
         correct: "100",
+        incorrect: [
+            "20",
+            "120",
+        ],
     },
     {
         question: "Which national anthem has no lyrics?",
@@ -45,49 +55,60 @@ var quizquestions = [
             "The Spanish National Anthem",
         ],
         correct: 'The Spanish National Anthem',
+        incorrect: [
+            "The Soviet National Anthem",
+            "The National Anthem of Madagascar",
+        ],
     },
 ];
 // created a function for count
 // created a timer
 function count() {
-    var timer = setInterval(function() {
-    timeleft--;
-    counter.textContent = timeleft;
-    if (timeleft === 0) {
-        clearInterval(timer);
-    }
-}, 1000);
+    var timer = setInterval(function () {
+        timeleft--;
+        counter.textContent = timeleft;
+        if (timeleft === 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
 }
-// added a function to show current question
+// added a function to show current question and possible answers
 function displayquestion() {
     quizcardel.innerHTML = "";
     var q = quizquestions[currentquestionindex];
     var qTitleEl = document.createElement("h1");
     qTitleEl.textContent = q.question;
     quizcardel.append(qTitleEl);
-    
+
     var answers = q.answers;
     for (var i = 0; i < answers.length; i++) {
         var answer = answers[i];
-        var button = document.createElement("button");
-        // var response = document.querySelector(".quizcard)");
-        button.textContent = answer;
-        button.addEventListener("click", function (event) {
+        var ansbutton = document.createElement("button");
+        ansbutton.classList.add("button");
+        ansbutton.textContent = answer;
+        ansbutton.addEventListener("click", function (event) {
             var selectedanswer = event.target.textContent;
             if (selectedanswer === q.correct) {
                 var response = document.createElement("p");
                 response.textContent = "Correct!";
+                quizcardel.append(response);
+                // response = setTimeout(hide, 1000);
                 correct();
             } else {
+                timeleft = timeleft - 10;
+                var bad = document.createElement("p");
+                bad.textContent = "Incorrect!";
+                quizcardel.append(bad);
                 incorrect();
             }
-            currentquestionindex++
+            currentquestionindex++;
             displayquestion();
         });
-        quizcardel.append(button);
+        quizcardel.append(ansbutton);
     }
+    // ansbutton.addEventListener("click", displayquestion(q.correct));
 }
-starti.addEventListener("click", function() { 
+starti.addEventListener("click", function () {
     count()
     displayquestion()
 }); 
