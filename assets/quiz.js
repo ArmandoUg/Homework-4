@@ -73,24 +73,23 @@ function count() {
         }
     }, 1000);
 }
-function closefl() {
-document.getElementById("magic").style.display= "none";
-}
 
-window.setTimeout(closefl, 1000)
-function flash() {
-    var mtimeleft = 1;
-    var mtimer = setInterval(function () {
-        if (mtimeleft === 1) {
-            mtimeleft--;
-        }
-        else {
-            clearInterval(mtimer);
-            window.setTimeout("flashy")
-        }
-    })
-}
+// function flash() {
+//     var mtimeleft = 1;
+//     var mtimer = setInterval(function () {
+//         if (mtimeleft === 1) {
+//             mtimeleft--;
+//         }
+//         else {
+//             clearInterval(mtimer);
+//             closefl();
+//         }
+//     })
+// }
 
+// function closefl() {
+// document.getElementById("magic").style.display = "none";
+// }
 // added a function to show current question and possible answers
 function displayquestion() {
     quizcardel.innerHTML = "";
@@ -118,7 +117,8 @@ function displayquestion() {
                     displayquestion();
                 }
                 correct();
-            } else {
+            } 
+            else {
                 function incorrect() {
                     timeleft = timeleft - 10;
                     var bad = document.createElement("p");
