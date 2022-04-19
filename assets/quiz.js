@@ -140,8 +140,9 @@ function displayquestion() {
     }
     // ansbutton.addEventListener("click", displayquestion(q.correct));
 }
-// created a new function
+// created a new function that clears html and adds new page
 function quizend() {
+    // stopped timer
     clearInterval(counter);
     quizcardel.innerHTML= "";
     var scoretitle = document.createElement("h1");
@@ -152,6 +153,7 @@ function quizend() {
     score.textContent = "Your score is" + timeleft;
     quizcardel.append(score);
     quizcardel.append(scoreinput);
+    // added a nested function to for submiting for to local storage
     function savescore() {
         var initials = scoreinput.value.trim();
         if (initials !== "") {
@@ -167,6 +169,9 @@ function quizend() {
 
         }
     }
+    submitBtn.addEventListener("click", function() {
+        savescore()
+    });
 }
 
 // added an event listener for starting the quiz
