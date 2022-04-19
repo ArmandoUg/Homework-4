@@ -140,6 +140,7 @@ function displayquestion() {
     }
     // ansbutton.addEventListener("click", displayquestion(q.correct));
 }
+// created a new function
 function quizend() {
     clearInterval(counter);
     quizcardel.innerHTML= "";
@@ -151,9 +152,21 @@ function quizend() {
     score.textContent = "Your score is" + timeleft;
     quizcardel.append(score);
     quizcardel.append(scoreinput);
-}
-function savescore() {
-    var initials
+    function savescore() {
+        var initials = scoreinput.value.trim();
+        if (initials !== "") {
+            var playerscores = JSON.parse(window.localStorage.getItem("playerscores")) || [];
+            // sets up format for new user
+            var newscore = {
+                score: timeleft,
+                initials: initials,
+            };
+            // saved to local storage
+            playerscores.push(newscore);
+            window.localStorage.setitem("playerscores", JSON.stringify(playerscores));
+
+        }
+    }
 }
 
 // added an event listener for starting the quiz
