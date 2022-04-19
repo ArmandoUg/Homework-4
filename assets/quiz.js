@@ -97,8 +97,15 @@ function displayquestion() {
     var qTitleEl = document.createElement("h1");
     qTitleEl.textContent = q.question;
     quizcardel.append(qTitleEl);
-
-
+    
+    
+    function correct() {
+        var response = document.createElement("p");
+        response.setAttribute("id","magic");
+        response.textContent = "Correct!";
+        quizcardel.append(response);
+        displayquestion();
+    }
     // added a for loop to conatin logic fow question swaping and for having the logic of correct and wrong answers
     var answers = q.answers;
     for (var i = 0; i < answers.length; i++) {
@@ -109,15 +116,12 @@ function displayquestion() {
         ansbutton.addEventListener("click", function (event) {
             var selectedanswer = event.target.textContent;
             if (selectedanswer === q.correct) {
-                function correct() {
-                    var response = document.createElement("p");
-                    response.setAttribute("id","magic");
-                    response.textContent = "Correct!";
-                    quizcardel.append(response);
-                    displayquestion();
-                }
                 correct();
             } 
+            
+            if (currentquestionindex === answers.length){
+                quizend()
+            }
             else {
                 function incorrect() {
                     timeleft = timeleft - 10;
@@ -127,15 +131,31 @@ function displayquestion() {
                 }
 
                 incorrect();
-                flash();
+                // flash();
             }
             currentquestionindex++;
-            // displayquestion();
+            displayquestion();
         });
         quizcardel.append(ansbutton);
     }
     // ansbutton.addEventListener("click", displayquestion(q.correct));
 }
+function quizend() {
+    clearInterval(counter);
+    quizcardel.innerHTML= "";
+    var scoretitle = document.createElement("h1");
+    var score = document.createElement("h2");
+    var scoreinput= document.createElement("form");
+    scoretitle.textContent= "Thank You for participating";
+    quizcardel.append(scoretitle);
+    score.textContent = "Your score is" + timeleft;
+    quizcardel.append(score);
+    quizcardel.append(scoreinput);
+}
+function savescore() {
+    var initials
+}
+
 // added an event listener for starting the quiz
 starti.addEventListener("click", function () {
     count()
