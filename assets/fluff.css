@@ -21,7 +21,10 @@ button {
    text-align:justify;
    padding:.4% ;
 }
-
+/* added styling to separate input to other elements */
+input {
+    margin-bottom: 10%;
+}
 /* added styling to starting quizcard class  */
 .quizcard {
     display: flex;
@@ -32,15 +35,27 @@ button {
     flex-direction: column;
     justify-content: space-between;
 }
-
+/* added syling to staring main text */
 .title {
     font-size: 200%;
 }
-
+/* Added styling to starting text */
 .intro {
     font-size: 130%;
 }
+/* added styling to start quiz button */
 .startbutton {
     display: inline-flex;
     text-align: right;
+}
+/* added styling to score table div */
+#Highscoretable {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    
+}
+/* added styling to submit button */
+#Submitt {
+    padding: 12px 4px 12px 4px
 }

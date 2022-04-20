@@ -6,9 +6,14 @@ var quizcardel = document.querySelector(".quizcard");
 var starti = document.querySelector(".startbutton");
 // added a var for count
 var timeleft = 60;
+
+// var table= document.querySelector(".scoretable");
+
+var highscorelink=document.querySelector(".lhighscore");
 // added a var for placement of questions
 var currentquestionindex = 0;
-var flashy = document.querySelector("#magic");
+
+// var flashy = document.querySelector("#magic");
 // created var to contain questions
 var quizquestions = [
     {
@@ -62,10 +67,11 @@ var quizquestions = [
         ],
     },
 ];
+var timer
 // created a function for count
 // created a timer
 function count() {
-    var timer = setInterval(function () {
+     timer = setInterval(function () {
         timeleft--;
         counter.textContent = timeleft;
         if (timeleft < 0) {
@@ -101,10 +107,11 @@ function displayquestion() {
     
     function correct() {
         var response = document.createElement("p");
-        response.setAttribute("id","magic");
+        // response.setAttribute("id","magic");
         response.textContent = "Correct!";
         quizcardel.append(response);
-        displayquestion();
+        // displayquestion();
+        console.log("correct");
     }
     // added a for loop to conatin logic fow question swaping and for having the logic of correct and wrong answers
     var answers = q.answers;
@@ -118,10 +125,6 @@ function displayquestion() {
             if (selectedanswer === q.correct) {
                 correct();
             } 
-            
-            if (currentquestionindex === answers.length){
-                quizend()
-            }
             else {
                 function incorrect() {
                     timeleft = timeleft - 10;
@@ -133,8 +136,13 @@ function displayquestion() {
                 incorrect();
                 // flash();
             }
+            
+            if (currentquestionindex === answers.length){
+                quizend()
+            }
             currentquestionindex++;
-            displayquestion();
+            setTimeout (displayquestion, 1000)
+            // displayquestion();
         });
         quizcardel.append(ansbutton);
     }
@@ -143,16 +151,27 @@ function displayquestion() {
 // created a new function that clears html and adds new page
 function quizend() {
     // stopped timer
-    clearInterval(counter);
+    clearInterval(timer);
     quizcardel.innerHTML= "";
     var scoretitle = document.createElement("h1");
     var score = document.createElement("h2");
-    var scoreinput= document.createElement("form");
-    scoretitle.textContent= "Thank You for participating";
+    var scoreform= document.createElement("form");
+    var tabledir= document.createElement("h2");
+    var scorelabel= document.createElement("input");
+    var table= document.createElement("div");
+    var submitBtn= document.createElement("button");
+    table.setAttribute("id", "Highscoretable");
+    submitBtn.setAttribute("id", "Submitt");
+    scoretitle.textContent= "Thank You for Participating!";
+    score.textContent = "Your score is " + timeleft;
+    tabledir.textContent= "Enter your initials below!";
     quizcardel.append(scoretitle);
-    score.textContent = "Your score is" + timeleft;
     quizcardel.append(score);
-    quizcardel.append(scoreinput);
+    quizcardel.append(tabledir);
+    quizcardel.append(scoreform);
+    scoreform.append(scorelabel);
+    quizcardel.append(table);
+    quizcardel.append(submitBtn)
     // added a nested function to for submiting for to local storage
     function savescore() {
         var initials = scoreinput.value.trim();
@@ -179,3 +198,5 @@ starti.addEventListener("click", function () {
     count()
     displayquestion()
 }); 
+
+highscorelink.addEventListener("click", quizend)
