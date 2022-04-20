@@ -13,7 +13,7 @@ button {
     display: inline-flex;
     background-color: blueviolet;
     border-radius: 20%;
-   text-align: center;
+   /* text-align: center; */
    flex-direction: column;
    justify-content: center;
    margin: auto;
@@ -25,6 +25,12 @@ button {
 input {
     margin-bottom: 10%;
 }
+/* added styling to highscores text */
+.lhighscore {
+    cursor: pointer;
+    color: blue;
+}
+
 /* added styling to starting quizcard class  */
 .quizcard {
     display: flex;
@@ -57,5 +63,9 @@ input {
 }
 /* added styling to submit button */
 #Submitt {
-    padding: 12px 4px 12px 4px
+    display: flex;
+    padding: 12px 1px 12px 1px;
+    text-align: justify;
+    justify-content: center;
+    width: 5%;
 }

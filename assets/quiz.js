@@ -165,6 +165,7 @@ function quizend() {
     scoretitle.textContent= "Thank You for Participating!";
     score.textContent = "Your score is " + timeleft;
     tabledir.textContent= "Enter your initials below!";
+    submitBtn.textContent= "Submit!"
     quizcardel.append(scoretitle);
     quizcardel.append(score);
     quizcardel.append(tabledir);
