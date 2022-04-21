@@ -9,7 +9,7 @@ var timeleft = 60;
 
 // var table= document.querySelector(".scoretable");
 
-var highscorelink=document.querySelector(".lhighscore");
+var highscorelink = document.querySelector(".lhighscore");
 // added a var for placement of questions
 var currentquestionindex = 0;
 
@@ -71,7 +71,7 @@ var timer
 // created a function for count
 // created a timer
 function count() {
-     timer = setInterval(function () {
+    timer = setInterval(function () {
         timeleft--;
         counter.textContent = timeleft;
         if (timeleft < 0) {
@@ -100,11 +100,14 @@ function count() {
 function displayquestion() {
     quizcardel.innerHTML = "";
     var q = quizquestions[currentquestionindex];
+    if (q >= quizquestions.length) {
+        quizend()
+    }
     var qTitleEl = document.createElement("h1");
     qTitleEl.textContent = q.question;
     quizcardel.append(qTitleEl);
-    
-    
+
+
     function correct() {
         var response = document.createElement("p");
         // response.setAttribute("id","magic");
@@ -124,7 +127,7 @@ function displayquestion() {
             var selectedanswer = event.target.textContent;
             if (selectedanswer === q.correct) {
                 correct();
-            } 
+            }
             else {
                 function incorrect() {
                     timeleft = timeleft - 10;
@@ -136,12 +139,12 @@ function displayquestion() {
                 incorrect();
                 // flash();
             }
-            
-            if (currentquestionindex === answers.length){
+
+            if (currentquestionindex === answers.length) {
                 quizend()
             }
             currentquestionindex++;
-            setTimeout (displayquestion, 1000)
+            setTimeout(displayquestion, 1000)
             // displayquestion();
         });
         quizcardel.append(ansbutton);
@@ -152,20 +155,20 @@ function displayquestion() {
 function quizend() {
     // stopped timer
     clearInterval(timer);
-    quizcardel.innerHTML= "";
+    quizcardel.innerHTML = "";
     var scoretitle = document.createElement("h1");
     var score = document.createElement("h2");
-    var scoreform= document.createElement("form");
-    var tabledir= document.createElement("h2");
-    var scorelabel= document.createElement("input");
-    var table= document.createElement("div");
-    var submitBtn= document.createElement("button");
+    var scoreform = document.createElement("form");
+    var tabledir = document.createElement("h2");
+    var scorelabel = document.createElement("input");
+    var table = document.createElement("div");
+    var submitBtn = document.createElement("button");
     table.setAttribute("id", "Highscoretable");
     submitBtn.setAttribute("id", "Submitt");
-    scoretitle.textContent= "Thank You for Participating!";
+    scoretitle.textContent = "Thank You for Participating!";
     score.textContent = "Your score is " + timeleft;
-    tabledir.textContent= "Enter your initials below!";
-    submitBtn.textContent= "Submit!"
+    tabledir.textContent = "Enter your initials below!";
+    submitBtn.textContent = "Submit!"
     quizcardel.append(scoretitle);
     quizcardel.append(score);
     quizcardel.append(tabledir);
@@ -175,7 +178,7 @@ function quizend() {
     quizcardel.append(submitBtn)
     // added a nested function to for submiting for to local storage
     function savescore() {
-        var initials = scoreinput.value.trim();
+        var initials = scorelabel.value.trim();
         if (initials !== "") {
             var playerscores = JSON.parse(window.localStorage.getItem("playerscores")) || [];
             // sets up format for new user
@@ -185,11 +188,11 @@ function quizend() {
             };
             // saved to local storage
             playerscores.push(newscore);
-            window.localStorage.setitem("playerscores", JSON.stringify(playerscores));
+            window.localStorage.setItem("playerscores", JSON.stringify(playerscores));
 
         }
     }
-    submitBtn.addEventListener("click", function() {
+    submitBtn.addEventListener("click", function () {
         savescore()
     });
 }
@@ -198,6 +201,6 @@ function quizend() {
 starti.addEventListener("click", function () {
     count()
     displayquestion()
-}); 
+});
 
 highscorelink.addEventListener("click", quizend)
