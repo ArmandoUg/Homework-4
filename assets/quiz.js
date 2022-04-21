@@ -80,76 +80,66 @@ function count() {
     }, 1000);
 }
 
-// function flash() {
-//     var mtimeleft = 1;
-//     var mtimer = setInterval(function () {
-//         if (mtimeleft === 1) {
-//             mtimeleft--;
-//         }
-//         else {
-//             clearInterval(mtimer);
-//             closefl();
-//         }
-//     })
-// }
 
-// function closefl() {
-// document.getElementById("magic").style.display = "none";
-// }
-// added a function to show current question and possible answers
 function displayquestion() {
+
     quizcardel.innerHTML = "";
-    var q = quizquestions[currentquestionindex];
-    var qTitleEl = document.createElement("h1");
-    qTitleEl.textContent = q.question;
-    quizcardel.append(qTitleEl);
-    if (currentquestionindex >= quizquestions.length) {
-        quizend()
+    if(currentquestionindex < 4) {
+      var q = quizquestions[currentquestionindex];
+      console.log(currentquestionindex)
+      var qTitleEl = document.createElement("h1");
+      qTitleEl.textContent = q.question;
+      quizcardel.append(qTitleEl);
+
+      if (currentquestionindex >= quizquestions.length) {
+          quizend()
+      }
+      // added a for loop to conatin logic fow question swaping and for having the logic of correct and wrong answers
+      var answers = q.answers;
+      for (var i = 0; i < answers.length; i++) {
+          var answer = answers[i];
+          var ansbutton = document.createElement("button");
+          ansbutton.classList.add("button");
+          ansbutton.textContent = answer;
+          ansbutton.addEventListener("click", function (event) {
+              var selectedanswer = event.target.textContent;
+              if (selectedanswer === q.correct) {
+                  correct();
+              }
+              else {
+
+                  incorrect();
+                  // flash();
+              }
+
+              if (currentquestionindex === answers.length) {
+                  quizend()
+              } else {
+                currentquestionindex++;
+                setTimeout(displayquestion, 1000);
+              }
+
+          });
+          quizcardel.append(ansbutton);
+      }
     }
 
 
-    function correct() {
-        var response = document.createElement("p");
-        // response.setAttribute("id","magic");
-        response.textContent = "Correct!";
-        quizcardel.append(response);
-        // displayquestion();
-        console.log("correct");
-    }
-    // added a for loop to conatin logic fow question swaping and for having the logic of correct and wrong answers
-    var answers = q.answers;
-    for (var i = 0; i < answers.length; i++) {
-        var answer = answers[i];
-        var ansbutton = document.createElement("button");
-        ansbutton.classList.add("button");
-        ansbutton.textContent = answer;
-        ansbutton.addEventListener("click", function (event) {
-            var selectedanswer = event.target.textContent;
-            if (selectedanswer === q.correct) {
-                correct();
-            }
-            else {
-                function incorrect() {
-                    timeleft = timeleft - 10;
-                    var bad = document.createElement("p");
-                    bad.textContent = "Incorrect!";
-                    quizcardel.append(bad);
-                }
-
-                incorrect();
-                // flash();
-            }
-
-            if (currentquestionindex === answers.length) {
-                quizend()
-            }
-            currentquestionindex++;
-            setTimeout(displayquestion, 1000)
-            // displayquestion();
-        });
-        quizcardel.append(ansbutton);
-    }
     // ansbutton.addEventListener("click", displayquestion(q.correct));
+}
+function incorrect() {
+    timeleft = timeleft - 10;
+    var bad = document.createElement("p");
+    bad.textContent = "Incorrect!";
+    quizcardel.append(bad);
+}
+function correct() {
+    var response = document.createElement("p");
+    // response.setAttribute("id","magic");
+    response.textContent = "Correct!";
+    quizcardel.append(response);
+    // displayquestion();
+    console.log("correct");
 }
 // created a new function that clears html and adds new page
 function quizend() {
