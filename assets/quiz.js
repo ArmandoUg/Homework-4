@@ -100,12 +100,12 @@ function count() {
 function displayquestion() {
     quizcardel.innerHTML = "";
     var q = quizquestions[currentquestionindex];
-    if (q >= quizquestions.length) {
-        quizend()
-    }
     var qTitleEl = document.createElement("h1");
     qTitleEl.textContent = q.question;
     quizcardel.append(qTitleEl);
+    if (currentquestionindex >= quizquestions.length) {
+        quizend()
+    }
 
 
     function correct() {
